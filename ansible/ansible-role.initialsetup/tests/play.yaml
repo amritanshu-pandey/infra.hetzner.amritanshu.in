@@ -1,0 +1,15 @@
+---
+- hosts: 127.0.0.1
+  name: test the role
+  become: false
+  connection: local
+  vars:
+    user_groups:
+      - wheel
+      - docker
+    user_name: serveruser
+    user_password: null
+    user_shell: /bin/bash
+  roles:
+    - ansible-role.initialsetup
+

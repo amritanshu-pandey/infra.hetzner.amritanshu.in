@@ -1,0 +1,21 @@
+---
+- name: create OS groups
+  group:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - '{{ user_groups }}'
+
+- name: add user {{ user_name }}
+  user:
+    name: '{{ user_name }}'
+    comment: '{{ user_name }}'
+    shell: '{{ user_shell }}'
+    groups: '{{ user_groups }}'
+
+- name: add user authorised key
+  authorized_key:
+    user: '{{ user_name }}'
+    state: present
+    key: '{{ user_authorised_key }}'
+  when: user_authorised_key
