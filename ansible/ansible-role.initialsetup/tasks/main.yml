@@ -18,4 +18,3 @@
     user: '{{ user_name }}'
     state: present
     key: '{{ user_authorised_key }}'
-  when: user_authorised_key
