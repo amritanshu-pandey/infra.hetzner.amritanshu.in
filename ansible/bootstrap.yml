@@ -12,3 +12,18 @@
     user_authorised_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJpo4AIVbDMXjNTberX1uBUrrNA5SwYILGtvYFJBM5+l email@amritanshu.in"
   roles:
     - ansible-role.initialsetup
+    - amritanshu_pandey.dockerd_ansible
+  tasks:
+    - name: Install the latest version of Apache and MariaDB
+      ansible.builtin.package:
+        name:
+          - neofetch
+          - htop
+          - bmon
+        state: latest
+    - lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
