@@ -27,7 +27,9 @@ resource "hcloud_server" "kubenode" {
     mkdir /tmp/bootstrap
     cd /tmp/bootstrap
     git clone https://github.com/amritanshu-pandey/infra.hetzner.amritanshu.in.git .
+    ansible-galaxy install amritanshu_pandey.dockerd_ansible
     cd ansible && ansible-playbook bootstrap.yml | tee ~/ansible.log
+
 		echo "<h1>Deployed via Terraform</h1>" | sudo -u serveruser  tee ~/bootstrap.log
 EOF
   network {
@@ -68,6 +70,7 @@ resource "hcloud_server" "rancheroolb" {
     mkdir /tmp/bootstrap
     cd /tmp/bootstrap
     git clone https://github.com/amritanshu-pandey/infra.hetzner.amritanshu.in.git .
+    ansible-galaxy install amritanshu_pandey.dockerd_ansible
     cd ansible && ansible-playbook bootstrap.yml | tee ~/ansible.log
 
     # Update dns record for kubelb.duckdns.org
